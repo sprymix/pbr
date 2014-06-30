@@ -82,6 +82,10 @@ def _pip_install(links, requires, root=None, option_dict=dict()):
             option_dict, 'skip_pip_install', 'SKIP_PIP_INSTALL'):
         return
     cmd = [sys.executable, '-m', 'pip.__init__', 'install']
+    if get_boolean_option(
+            option_dict, 'pip_upgrade_requirements',
+                         'PIP_UPGRADE_REQUIREMENTS'):
+        cmd.append('--upgrade')
     if root:
         cmd.append("--root=%s" % root)
     for link in links:
